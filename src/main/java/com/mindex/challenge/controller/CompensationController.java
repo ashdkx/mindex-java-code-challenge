@@ -19,15 +19,13 @@ public class CompensationController {
 
     @PostMapping("/compensation")
     public Compensation create(@RequestBody Compensation compensation) {
-        LOG.debug("Received employee create request for [{}]", compensation);
-
+        LOG.debug("Received compensation create request for [{}]", compensation);
         return compensationService.create(compensation);
     }
 
     @GetMapping("/compensation/{id}")
     public Compensation read(@PathVariable String id) {
-        LOG.debug("Received employee create request for id [{}]", id);
-
+        LOG.debug("Received compensation read request for id [{}]", id);
         return compensationService.read(id);
     }
 
