@@ -1,17 +1,23 @@
 package com.mindex.challenge.data;
 
 
-import java.sql.Date;
+import org.springframework.data.mongodb.core.mapping.DBRef;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class Compensation {
+
+    @DBRef
     Employee employee;
     int salary;
-    Date effectiveDate;
+    // assuming the input format is a string (ex: "10/22/2021", month/day/year) -> convert to long and save in Date
+    LocalDate effectiveDate;
 
-    public Compensation(Employee employee, int salary, Date effectiveDate) {
+    public Compensation(Employee employee, int salary, String effectiveDate) {
         this.employee = employee;
         this.salary = salary;
-        this.effectiveDate = effectiveDate;
+        this.effectiveDate = LocalDate.parse(effectiveDate, DateTimeFormatter.ofPattern("MM/dd/yyyy"));
     }
 
     public Employee getEmployee() {
@@ -30,11 +36,11 @@ public class Compensation {
         this.salary = salary;
     }
 
-    public Date getEffectiveDate() {
+    public LocalDate getEffectiveDate() {
         return effectiveDate;
     }
 
-    public void setEffectiveDate(Date effectiveDate) {
-        this.effectiveDate = effectiveDate;
+    public void setEffectiveDate(String effectiveDate) {
+        this.effectiveDate = LocalDate.parse(effectiveDate, DateTimeFormatter.ofPattern("MM/dd/yyyy"));
     }
 }

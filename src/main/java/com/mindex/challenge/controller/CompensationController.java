@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class CompensationController {
-    private static final Logger LOG = LoggerFactory.getLogger(EmployeeController.class);
+    private static final Logger LOG = LoggerFactory.getLogger(CompensationController.class);
 
     @Autowired
     private CompensationService compensationService;
@@ -26,8 +26,4 @@ public class CompensationController {
         LOG.debug("Received compensation read request for id [{}]", id);
         return compensationService.read(id);
     }
-
-
-
-
 }
