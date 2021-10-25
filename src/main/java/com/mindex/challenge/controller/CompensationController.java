@@ -29,8 +29,8 @@ public class CompensationController {
             return new ResponseEntity<>(createdCompensation, HttpStatus.OK);
         } catch (Exception e) {
             // rare case of errors happening in database
-            LOG.debug("Fatal error in creating entry for in database");
-            return new ResponseEntity(Collections.singletonMap("Error:", "Internal Server Error"), HttpStatus.INTERNAL_SERVER_ERROR);
+            LOG.debug("Fatal error in creating entry for in database (Compensation POST endpoint)");
+            return new ResponseEntity<>(Collections.singletonMap("Error:", "Internal Server Error"), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -44,10 +44,11 @@ public class CompensationController {
                 return new ResponseEntity<>(compensation, HttpStatus.OK);
             }
         } catch (RuntimeException e) {
+            LOG.debug("User not found for requested id [{}]", id);
             return new ResponseEntity<>(Collections.singletonMap("Error:", "User not found"), HttpStatus.NOT_FOUND);
         }
         // this should never happen as try/catch will handle the errors already
-        LOG.debug("Fatal error in reading from the database");
-        return new ResponseEntity(Collections.singletonMap("Error:", "Internal Server Error"), HttpStatus.INTERNAL_SERVER_ERROR);
+        LOG.debug("Fatal error in reading from the database (Compensation GET endpoint)");
+        return new ResponseEntity<>(Collections.singletonMap("Error:", "Internal Server Error"), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }

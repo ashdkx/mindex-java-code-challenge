@@ -31,10 +31,8 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public Employee read(String id) {
-        LOG.debug("Creating employee with id [{}]", id);
-
+        LOG.debug("Reading employee with id [{}]", id);
         Employee employee = employeeRepository.findByEmployeeId(id);
-
         if (employee == null) {
             throw new RuntimeException("Invalid employeeId: " + id);
         }
@@ -55,13 +53,10 @@ public class EmployeeServiceImpl implements EmployeeService {
         List<Employee> employees = employee.getDirectReports();
         if (employees != null) {
             for (Employee employee1 : employees) {
-                //if (employee1 != null) {
-                    totalDirectReports++;
-                    totalDirectReports += getListOfReports(employee1.getEmployeeId());
-                //}
+                totalDirectReports++;
+                totalDirectReports += getListOfReports(employee1.getEmployeeId());
             }
         }
-
         return totalDirectReports;
     }
 }

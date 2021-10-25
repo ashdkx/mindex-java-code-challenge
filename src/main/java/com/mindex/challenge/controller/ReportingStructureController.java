@@ -30,11 +30,12 @@ public class ReportingStructureController {
                 return new ResponseEntity<>(reportingStructure, HttpStatus.OK);
             }
         } catch (RuntimeException e) {
+            LOG.debug("User not found for requested id [{}]", id);
             return new ResponseEntity<>(Collections.singletonMap("Error:", "User not found"), HttpStatus.NOT_FOUND);
         }
         // this should never happen as the errors should be handle in the try/catch already
-        LOG.debug("Fatal error in reading from database");
-        return new ResponseEntity(Collections.singletonMap("Error:", "Internal Server Error"), HttpStatus.INTERNAL_SERVER_ERROR);
+        LOG.debug("Fatal error in reading from database (ReportingStructure GET endpoint)");
+        return new ResponseEntity<>(Collections.singletonMap("Error:", "Internal Server Error"), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
 }
