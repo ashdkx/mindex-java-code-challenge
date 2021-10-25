@@ -36,7 +36,6 @@ public class CompensationServiceImpl implements CompensationService {
         if (compensation == null) {
             throw new RuntimeException("No compensation record for employeeId: " + employeeId);
         }
-
         return compensation;
     }
 }

@@ -3,21 +3,26 @@ package com.mindex.challenge.data;
 
 import org.springframework.data.mongodb.core.mapping.DBRef;
 
+import java.time.Instant;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 
 public class Compensation {
 
     @DBRef
     Employee employee;
     int salary;
-    // assuming the input format is a string (ex: "10/22/2021", month/day/year) -> convert to long and save in Date
-    LocalDate effectiveDate;
+    // assuming the input format is a string (ex: "10/22/2021", month/day/year) -> convert Date
+    String effectiveDate;
 
-    public Compensation(Employee employee, int salary, String effectiveDate) {
-        this.employee = employee;
-        this.salary = salary;
-        this.effectiveDate = LocalDate.parse(effectiveDate, DateTimeFormatter.ofPattern("MM/dd/yyyy"));
+    //    public Compensation(Employee employee, int salary, String effectiveDate) {
+//        this.employee = employee;
+//        this.salary = salary;
+//        LocalDate localDate = LocalDate.parse(effectiveDate, DateTimeFormatter.ofPattern("MM/dd/yyyy"));
+//        this.effectiveDate = Date.from(Instant.ofEpochSecond(localDate.toEpochDay()));
+//    }
+    public Compensation() {
     }
 
     public Employee getEmployee() {
@@ -36,11 +41,13 @@ public class Compensation {
         this.salary = salary;
     }
 
-    public LocalDate getEffectiveDate() {
+    public String getEffectiveDate() {
         return effectiveDate;
     }
 
     public void setEffectiveDate(String effectiveDate) {
-        this.effectiveDate = LocalDate.parse(effectiveDate, DateTimeFormatter.ofPattern("MM/dd/yyyy"));
+//        LocalDate localDate = LocalDate.parse(effectiveDate, DateTimeFormatter.ofPattern("MM/dd/yyyy"));
+//        this.effectiveDate = Date.from(Instant.ofEpochSecond(localDate.toEpochDay()));
+        this.effectiveDate = effectiveDate;
     }
 }
