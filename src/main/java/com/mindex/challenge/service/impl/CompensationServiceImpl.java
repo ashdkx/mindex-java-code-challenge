@@ -8,7 +8,9 @@ import com.mindex.challenge.service.EmployeeService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 @Service
 public class CompensationServiceImpl implements CompensationService {
@@ -34,7 +36,8 @@ public class CompensationServiceImpl implements CompensationService {
         LOG.debug("Reading compensation with employee [{}]", employeeId);
         Compensation compensation = compensationRepository.findByEmployee(employeeService.read(employeeId));
         if (compensation == null) {
-            throw new RuntimeException("No compensation record for employeeId: " + employeeId);
+            LOG.debug("No compensation record for employeeId: [{}]", employeeId);
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No compensation record for employeeId: " + employeeId);
         }
         return compensation;
     }

@@ -6,7 +6,9 @@ import com.mindex.challenge.service.EmployeeService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.UUID;
@@ -34,7 +36,8 @@ public class EmployeeServiceImpl implements EmployeeService {
         LOG.debug("Reading employee with id [{}]", id);
         Employee employee = employeeRepository.findByEmployeeId(id);
         if (employee == null) {
-            throw new RuntimeException("Invalid employeeId: " + id);
+            LOG.debug("Employee not found [{}]", id);
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Employee not found " + id);
         }
 
         return employee;
