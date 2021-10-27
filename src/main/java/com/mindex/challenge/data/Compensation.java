@@ -12,8 +12,10 @@ public class Compensation {
 
     @DBRef
     Employee employee;
+    // salary unit is assumed to be USD
     int salary;
     // assuming the input format is a string (ex: "10/22/2021", month/day/year) -> convert Date
+    // string here is a rather bad but safe option as the input is not specified
     String effectiveDate;
 
     //    public Compensation(Employee employee, int salary, String effectiveDate) {
